@@ -1,9 +1,12 @@
 from pytest_bdd import scenario, given, when, then
 import requests
 
+from utilities.Configs import getConfigs
+
+
 @given("User is in the home page")
 def step_impl(context):
-    context.products = requests.get('https://automationexercise.com')
+    context.products = getConfigs()['API']['endpoint']['products']
 
 
 @when("User request a list for the products")
@@ -17,4 +20,3 @@ def step_impl(context):
     assert status_code == 200
     response = context.products.json()
     print(response)
-
